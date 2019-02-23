@@ -14,3 +14,19 @@ let x = 3;
 }
 
 console.log(x);
+
+// const
+
+const a = "a";
+
+const c = { a: 1, b: 2 };
+
+const d = [1, 2];
+
+d[0] = 3;
+
+c.b = 3;
+
+console.log(d);
+
+console.log(c);
