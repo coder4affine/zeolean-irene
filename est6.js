@@ -108,7 +108,7 @@ const y = {
 
 console.log(x);
 
-console.log(y);
+console.log(y.greet());
 
 class Animal {
   constructor(type = "Animal") {
@@ -431,3 +431,69 @@ const a = users.reduce((p, c) => {
 }, []);
 
 console.log(a);
+
+// const arr = [1,2,3];
+
+// console.log(arr.length);
+
+// const newArr = arr.map(x => {
+//     if(x % 2 === 0) {
+//         return x * 2;
+//     } else {
+//         return x;
+//     }
+// });
+
+// const newArr = arr.filter(x => x % 3 === 0);
+
+// const newArr = arr.find(x => x % 1 === 0)
+
+// console.log(newArr);
+
+// for (const key in y) {
+//     console.log(key);
+//     console.log(y[key])
+//     // if (object.hasOwnProperty(key)) {
+//     //     const element = object[key];
+
+//     // }
+// }
+const x = {
+  a: 1,
+  b: 2,
+  c: 3
+};
+
+const y = [1, 2, 3];
+
+for (const item of y) {
+  console.log(item);
+}
+
+for (const [key, value] of Object.entries(x)) {
+  console.log(key);
+  console.log(value);
+}
+const prom1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("prom1");
+  }, 3000);
+});
+
+const prom2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("prom2");
+  }, 2000);
+});
+
+const promAll = Promise.all([prom1, prom2])
+  .then(x => console.log(x))
+  .catch(err => console.log(err));
+
+const promRace = Promise.race([prom1, prom2])
+  .then(x => console.log(x))
+  .catch(err => console.log(err));
+
+import * as abc from "./es7";
+import {} from "module";
+import moduleName from "module";
