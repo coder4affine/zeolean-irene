@@ -109,7 +109,6 @@ export default class index extends PureComponent {
           />
         </div>
         <FilterTodo filterTodos={this.filterTodos} />
-        {/* Create new Component FilterTodo */}
       </div>
     );
   }

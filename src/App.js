@@ -19,6 +19,26 @@ import React, { Component, Fragment } from "react";
 //   </Fragment>
 // );
 
+// const a = {
+//   a: 1,
+//   b: 2,
+//   c: {
+//     d: {
+//       e: 5
+//     }
+//   }
+// }
+
+// const b = {
+//   a: 1,
+//   b: 2,
+//   c: {
+//     d: {
+//       e: 6
+//     }
+//   }
+// }
+
 //  App -> click listner -> unmount  -> remoe lister  -> Test -> click
 
 class App extends Component {
