@@ -3,7 +3,7 @@
 exports[`snapshot snapshot of todo 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <index />,
+  Symbol(enzyme.__unrendered__): <hocComponent />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -16,297 +16,21 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": Array [
-        <div
-          style={
-            Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
-              "flexDirection": "column",
-              "width": "100%",
-            }
-          }
-        >
-          <h1>
-            My To-do
-          </h1>
-          <UNDEFINED
-            error={false}
-            onAddTodo={[Function]}
-            onChange={[Function]}
-            todo=""
-          />
-          <UNDEFINED
-            deleteTodo={[Function]}
-            onCompleteTask={[Function]}
-            status="all"
-            todos={Array []}
-          />
-        </div>,
-        <UNDEFINED
-          filterTodos={[Function]}
-        />,
-      ],
-      "style": Object {
-        "alignItems": "center",
-        "display": "flex",
-        "flexDirection": "column",
-        "height": "100vh",
-        "maxWidth": 1024,
-      },
-    },
+    "nodeType": "class",
+    "props": Object {},
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <h1>
-              My To-do
-            </h1>,
-            <UNDEFINED
-              error={false}
-              onAddTodo={[Function]}
-              onChange={[Function]}
-              todo=""
-            />,
-            <UNDEFINED
-              deleteTodo={[Function]}
-              onCompleteTask={[Function]}
-              status="all"
-              todos={Array []}
-            />,
-          ],
-          "style": Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "flexDirection": "column",
-            "width": "100%",
-          },
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "My To-do",
-            },
-            "ref": null,
-            "rendered": "My To-do",
-            "type": "h1",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "error": false,
-              "onAddTodo": [Function],
-              "onChange": [Function],
-              "todo": "",
-            },
-            "ref": null,
-            "rendered": null,
-            "type": Object {
-              "$$typeof": Symbol(react.memo),
-              "compare": null,
-              "type": [Function],
-            },
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "deleteTodo": [Function],
-              "onCompleteTask": [Function],
-              "status": "all",
-              "todos": Array [],
-            },
-            "ref": null,
-            "rendered": null,
-            "type": Object {
-              "$$typeof": Symbol(react.memo),
-              "compare": null,
-              "type": [Function],
-            },
-          },
-        ],
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "filterTodos": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": Object {
-          "$$typeof": Symbol(react.memo),
-          "compare": null,
-          "type": [Function],
-        },
-      },
-    ],
-    "type": "div",
+    "rendered": null,
+    "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <div
-            style={
-              Object {
-                "alignItems": "center",
-                "display": "flex",
-                "flex": 1,
-                "flexDirection": "column",
-                "width": "100%",
-              }
-            }
-          >
-            <h1>
-              My To-do
-            </h1>
-            <UNDEFINED
-              error={false}
-              onAddTodo={[Function]}
-              onChange={[Function]}
-              todo=""
-            />
-            <UNDEFINED
-              deleteTodo={[Function]}
-              onCompleteTask={[Function]}
-              status="all"
-              todos={Array []}
-            />
-          </div>,
-          <UNDEFINED
-            filterTodos={[Function]}
-          />,
-        ],
-        "style": Object {
-          "alignItems": "center",
-          "display": "flex",
-          "flexDirection": "column",
-          "height": "100vh",
-          "maxWidth": 1024,
-        },
-      },
+      "nodeType": "class",
+      "props": Object {},
       "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <h1>
-                My To-do
-              </h1>,
-              <UNDEFINED
-                error={false}
-                onAddTodo={[Function]}
-                onChange={[Function]}
-                todo=""
-              />,
-              <UNDEFINED
-                deleteTodo={[Function]}
-                onCompleteTask={[Function]}
-                status="all"
-                todos={Array []}
-              />,
-            ],
-            "style": Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
-              "flexDirection": "column",
-              "width": "100%",
-            },
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "My To-do",
-              },
-              "ref": null,
-              "rendered": "My To-do",
-              "type": "h1",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "error": false,
-                "onAddTodo": [Function],
-                "onChange": [Function],
-                "todo": "",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": Object {
-                "$$typeof": Symbol(react.memo),
-                "compare": null,
-                "type": [Function],
-              },
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "deleteTodo": [Function],
-                "onCompleteTask": [Function],
-                "status": "all",
-                "todos": Array [],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": Object {
-                "$$typeof": Symbol(react.memo),
-                "compare": null,
-                "type": [Function],
-              },
-            },
-          ],
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "filterTodos": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": Object {
-            "$$typeof": Symbol(react.memo),
-            "compare": null,
-            "type": [Function],
-          },
-        },
-      ],
-      "type": "div",
+      "rendered": null,
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -330,6 +54,5 @@ ShallowWrapper {
       },
     },
   },
-  Symbol(enzyme.__childContext__): null,
 }
 `;

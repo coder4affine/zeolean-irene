@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const todoList = ({ todos, onCompleteTask, deleteTodo, status }) => {
   const filteredTodos = todos.filter(x => {
@@ -45,6 +45,11 @@ const todoList = ({ todos, onCompleteTask, deleteTodo, status }) => {
   );
 };
 
-todoList.propTypes = {};
+todoList.propTypes = {
+  todos: PropTypes.array.isRequired,
+  onCompleteTask: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  status: PropTypes.string.isRequired
+};
 
 export default memo(todoList);

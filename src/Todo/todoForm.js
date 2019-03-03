@@ -1,5 +1,6 @@
 import React, { memo } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
+import test from "../HOC/test";
 
 const todoForm = ({ onAddTodo, todo, error, onChange }) => {
   console.log("todoForm");
@@ -22,6 +23,15 @@ const todoForm = ({ onAddTodo, todo, error, onChange }) => {
   );
 };
 
-todoForm.propTypes = {};
+todoForm.defaultProps = {
+  todo: ""
+};
 
-export default memo(todoForm);
+todoForm.propTypes = {
+  onAddTodo: PropTypes.func.isRequired,
+  todo: PropTypes.string,
+  error: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+export default memo(test(todoForm));

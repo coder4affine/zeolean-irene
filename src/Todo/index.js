@@ -3,11 +3,15 @@ import React, { PureComponent } from "react";
 import TodoForm from "./todoForm";
 import TodoList from "./todoList";
 import FilterTodo from "./filterTodo";
+import ErrorBoundary from "../component/ErrorBoundary";
+import test from "../HOC/test";
 // Import FilterTodo here
 
 // https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/
 
-export default class index extends PureComponent {
+// https://reactjs.org/docs/typechecking-with-proptypes.html
+
+class index extends PureComponent {
   static propTypes = {};
 
   state = {
@@ -76,40 +80,44 @@ export default class index extends PureComponent {
     const { error, todo, todos, status } = this.state;
 
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          maxWidth: 1024,
-          height: "100vh"
-        }}
-      >
+      <ErrorBoundary>
         <div
           style={{
             display: "flex",
-            flex: 1,
             flexDirection: "column",
-            width: "100%",
-            alignItems: "center"
+            alignItems: "center",
+            maxWidth: 1024,
+            height: "100vh"
           }}
         >
-          <h1>My To-do</h1>
-          <TodoForm
-            onAddTodo={this.onAddTodo}
-            todo={todo}
-            error={error}
-            onChange={this.onChange}
-          />
-          <TodoList
-            todos={todos}
-            status={status}
-            onCompleteTask={this.onCompleteTask}
-            deleteTodo={this.deleteTodo}
-          />
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              width: "100%",
+              alignItems: "center"
+            }}
+          >
+            <h1>My To-do</h1>
+            <TodoForm
+              onAddTodo={this.onAddTodo}
+              todo={todo}
+              error={error}
+              onChange={this.onChange}
+            />
+            <TodoList
+              todos={todos}
+              status={status}
+              onCompleteTask={this.onCompleteTask}
+              deleteTodo={this.deleteTodo}
+            />
+          </div>
+          <FilterTodo filterTodos={this.filterTodos} />
         </div>
-        <FilterTodo filterTodos={this.filterTodos} />
-      </div>
+      </ErrorBoundary>
     );
   }
 }
+
+export default test(index);
