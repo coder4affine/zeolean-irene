@@ -1,13 +1,13 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-// import App from "./App";
-import Todo from "./Todo";
+import App from "./App";
+// import Todo from "./Todo";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <StrictMode>
-    <Todo />
+    <App />
   </StrictMode>,
   document.getElementById("root")
 );

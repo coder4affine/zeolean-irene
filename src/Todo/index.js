@@ -11,6 +11,12 @@ import test from "../HOC/test";
 
 // https://reactjs.org/docs/typechecking-with-proptypes.html
 
+// https://github.com/typicode/json-server
+
+// npm install -g json-server
+
+// json-server --watch db.json --port 3004
+
 class index extends PureComponent {
   static propTypes = {};
 
