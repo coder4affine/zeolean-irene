@@ -21,39 +21,82 @@ class index extends PureComponent {
     status: "all"
   };
 
+  componentDidMount = async () => {
+    try {
+      const res = await fetch("http://localhost:3004/todos");
+      const todos = await res.json();
+      this.setState({ todos });
+    } catch (error) {
+      this.setState({ error });
+    }
+    // fetch("http://localhost:3004/todos")
+    //   .then(res => {
+    //     console.log(
+    //       res.json().then(data => {
+    //         this.setState({ todos: data });
+    //       })
+    //     );
+    //   })
+    //   .catch(error => {
+    //     this.setState({ error });
+    //   });
+  };
+
   onChange = e => {
     this.setState({ todo: e.target.value });
   };
 
-  onAddTodo = e => {
+  onAddTodo = async e => {
     e.preventDefault();
     const { todo, todos } = this.state;
     if (!todo) {
       this.setState({ error: "Required" });
       return;
     }
-    this.setState({
-      todos: [
-        ...todos,
-        { id: new Date().valueOf(), text: todo, isDone: false }
-      ],
-      todo: ""
-    });
+
+    try {
+      const newTodo = { id: new Date().valueOf(), text: todo, isDone: false };
+      await fetch("http://localhost:3004/todos", {
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify(newTodo)
+      });
+      this.setState({
+        todos: [...todos, newTodo],
+        todo: ""
+      });
+    } catch (error) {}
   };
 
-  onCompleteTask = id => {
+  onCompleteTask = async id => {
     const { todos } = this.state;
     const index = todos.findIndex(x => x.id === id);
+    const updatedTodo = { ...todos[index], isDone: !todos[index].isDone };
+    await fetch(`http://localhost:3004/todos/${todos[index].id}`, {
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      method: "PUT",
+      body: JSON.stringify(updatedTodo)
+    });
+
     const newTodos = [
       ...todos.slice(0, index),
-      { ...todos[index], isDone: !todos[index].isDone },
+      updatedTodo,
       ...todos.slice(index + 1)
     ];
     this.setState({ todos: newTodos });
   };
 
-  deleteTodo = id => {
+  deleteTodo = async id => {
     const { todos } = this.state;
+    await fetch(`http://localhost:3004/todos/${id}`, {
+      method: "DELETE"
+    });
     this.setState({
       todos: todos.filter(x => x.id !== id)
     });
