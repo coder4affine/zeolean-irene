@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import PropTypes from "prop-types";
 
 class index extends Component {
   state = {
     courses: [],
-    authors: []
+    authors: [],
   };
 
   componentDidMount() {
@@ -12,15 +12,27 @@ class index extends Component {
   }
 
   getCourses = async () => {
-    const coursesApi = await fetch("http://localhost:3004/courses");
-    const authorsApi = await fetch("http://localhost:3004/authors");
+    const coursesApi = await fetch('http://localhost:3004/courses');
+    const authorsApi = await fetch('http://localhost:3004/authors');
     const res = await Promise.all([coursesApi, authorsApi]);
     console.log(res);
     const courses = await res[0].json();
     const authors = await res[1].json();
     this.setState({
       courses,
-      authors
+      authors,
+    });
+  };
+
+  addCourses = () => {
+    const {
+      history: { push },
+    } = this.props;
+
+    push({
+      pathname: '/users',
+      search: '?query=abc',
+      state: { authors: this.state.authors },
     });
   };
 
@@ -28,6 +40,7 @@ class index extends Component {
     const { courses } = this.state;
     return (
       <div>
+        <button onClick={this.addCourses}>Create Course</button>
         <table>
           <thead>
             <tr>
@@ -39,9 +52,11 @@ class index extends Component {
             </tr>
           </thead>
           <tbody>
-            {courses.map(course => (
+            {courses.map((course, index) => (
               <tr key={course.id}>
-                <td>{course.title}</td>
+                <td className={index % 2 === 0 ? 'spanStyle' : 'spanStyle title'}>
+                  {course.title}
+                </td>
                 <td>
                   <a href={course.watchHref}>Link</a>
                 </td>

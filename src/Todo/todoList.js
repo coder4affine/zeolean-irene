@@ -1,25 +1,25 @@
-import React, { memo } from "react";
-import PropTypes from "prop-types";
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
 const todoList = ({ todos, onCompleteTask, deleteTodo, status }) => {
   const filteredTodos = todos.filter(x => {
-    if (status === "pending") {
+    if (status === 'pending') {
       return !x.isDone;
-    } else if (status === "completed") {
-      return x.isDone;
-    } else {
-      return true;
     }
+    if (status === 'completed') {
+      return x.isDone;
+    }
+    return true;
   });
   return (
     <div
       style={{
-        overflow: "auto",
-        width: "100%"
+        overflow: 'auto',
+        width: '100%',
       }}
     >
       {filteredTodos.map(item => (
-        <div style={{ display: "flex", margin: 10 }} key={item.id}>
+        <div style={{ display: 'flex', margin: 10 }} key={item.id}>
           <input
             type="checkbox"
             defaultChecked={item.isDone}
@@ -28,10 +28,10 @@ const todoList = ({ todos, onCompleteTask, deleteTodo, status }) => {
           />
           <span
             style={{
-              display: "flex",
+              display: 'flex',
               flex: 1,
-              padding: "0 10px",
-              textDecoration: item.isDone ? "line-through" : "none"
+              padding: '0 10px',
+              textDecoration: item.isDone ? 'line-through' : 'none',
             }}
           >
             {item.text}
@@ -49,7 +49,7 @@ todoList.propTypes = {
   todos: PropTypes.array.isRequired,
   onCompleteTask: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  status: PropTypes.string.isRequired
+  status: PropTypes.string.isRequired,
 };
 
 export default memo(todoList);

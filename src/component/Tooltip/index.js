@@ -1,20 +1,20 @@
-import React, { PureComponent } from "react";
-import ReactDom from "react-dom";
-import PropTypes from "prop-types";
+import React, { PureComponent } from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
 
 class index extends PureComponent {
   state = {
-    active: false
+    active: false,
   };
 
   constructor(props) {
     super(props);
 
-    const id = "tooltip";
+    const id = 'tooltip';
     this.domNode = document.querySelector(`#${id}`);
     if (!this.domNode) {
-      this.domNode = document.createElement("div");
-      this.domNode.setAttribute("id", id);
+      this.domNode = document.createElement('div');
+      this.domNode.setAttribute('id', id);
       document.body.appendChild(this.domNode);
     }
     this.sourceRef = React.createRef();
@@ -24,48 +24,48 @@ class index extends PureComponent {
     if (!this.state.active) return null;
     const { top, left, width } = this.sourceRef.current.getBoundingClientRect();
     const tooltip = {
-      position: "absolute",
+      position: 'absolute',
       zIndex: 10,
       bottom: window.innerWidth - top + 50 - window.scrollY,
-      left: left + width / 2 + window.scrollX
+      left: left + width / 2 + window.scrollX,
     };
     return ReactDom.createPortal(
       <div style={tooltip}>
         <div
           role="tooltip"
           style={{
-            position: "relative",
-            left: "-50%",
-            padding: "8px 16px",
+            position: 'relative',
+            left: '-50%',
+            padding: '8px 16px',
             borderRadius: 4,
-            background: "#424242",
-            color: "white"
+            background: '#424242',
+            color: 'white',
           }}
         >
           {this.props.text}
           <span
             style={{
-              position: "absolute",
+              position: 'absolute',
               bottom: -60,
-              left: "calc(50% - 5px)",
+              left: 'calc(50% - 5px)',
               borderWidth: 5,
-              borderStyle: "solid",
-              borderColor: "#424242 transparent transparent transparent"
+              borderStyle: 'solid',
+              borderColor: '#424242 transparent transparent transparent',
             }}
           />
         </div>
       </div>,
-      this.domNode
+      this.domNode,
     );
   };
 
   showTooltip = () => {
-    console.log("showTooltip");
+    console.log('showTooltip');
     this.setState({ active: true });
   };
 
   hideTooltip = () => {
-    console.log("hideTooltip");
+    console.log('hideTooltip');
     this.setState({ active: false });
   };
 

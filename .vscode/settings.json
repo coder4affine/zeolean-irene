@@ -1,5 +1,20 @@
 {
-    "cSpell.words": [
-        "todos"
-    ]
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "node_modules": true
+  },
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "git.ignoreLimitWarning": true,
+  "cSpell.words": ["todos"],
+  "[javascript]": { "editor.formatOnSave": true },
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "prettier.eslintIntegration": true,
+  "telemetry.enableTelemetry": false
 }

@@ -1,21 +1,27 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class index extends Component {
-  state = {
-    hasError: false
+  static propTypes = {
+    children: PropTypes.element.isRequired,
   };
 
-  static getDerivedStateFromError(props, state) {
+  state = {
+    hasError: false,
+  };
+
+  static getDerivedStateFromError() {
     return {
-      hasError: true
+      hasError: true,
     };
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    const { children } = this.props;
+    if (hasError) {
       return <h2>Oops! something went wrong try after sometime</h2>;
     }
-    return this.props.children;
+    return children;
   }
 }

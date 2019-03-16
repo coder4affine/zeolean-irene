@@ -12,3 +12,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.spanStyle {
+  color: red;
+}
+
+.title {
+  text-decoration: line-through;
+}

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from 'react';
 // import logo from "./logo.svg";
 // import "./App.css";
 
@@ -58,20 +58,20 @@ import React, { Component, Fragment } from "react";
 class App extends Component {
   state = {
     text: {
-      greet: "hello",
-      isError: false
-    }
+      greet: 'hello',
+      isError: false,
+    },
   };
 
   constructor(props) {
     super(props);
-    console.log("constructor");
+    console.log('constructor');
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log("getDerivedStateFromProps");
+    console.log('getDerivedStateFromProps');
     return {
-      greet: `${props.text} greet`
+      greet: `${props.text} greet`,
     };
   }
 
@@ -84,48 +84,48 @@ class App extends Component {
   // UNSAFE_componentWillUpdate() {}
 
   componentDidMount() {
-    document.addEventListener("click", () => {
-      console.log("click");
+    document.addEventListener('click', () => {
+      console.log('click');
     });
 
     // this.interval = setInterval(() => {
     //   console.log("hello interval");
     // }, 1000);
 
-    this.firstH1.setAttribute("class", "h1Class");
-    console.log("componentDidMount");
+    this.firstH1.setAttribute('class', 'h1Class');
+    console.log('componentDidMount');
   }
 
   shouldComponentUpdate() {
-    console.log("shouldComponentUpdate");
+    console.log('shouldComponentUpdate');
     return true;
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log("getSnapshotBeforeUpdate");
-    return "hello world";
+    console.log('getSnapshotBeforeUpdate');
+    return 'hello world';
   }
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
     console.log(snapshot);
-    console.log("componentDidUpdate");
+    console.log('componentDidUpdate');
   };
 
   componentWillUnmount = () => {
     clearInterval(this.interval);
-    document.removeEventListener("click");
+    document.removeEventListener('click');
   };
 
   static getDerivedStateFromError(error) {
     return {
-      isError: true
+      isError: true,
     };
   }
 
   componentDidCatch(error, info) {}
 
   render() {
-    console.log("render");
+    console.log('render');
     return (
       <Fragment>
         <h1
@@ -140,7 +140,7 @@ class App extends Component {
           name="hello"
           onClick={() => {
             this.setState({
-              text: { ...this.state.text, greet: "hello world" }
+              text: { ...this.state.text, greet: 'hello world' },
             });
           }}
         >

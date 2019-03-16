@@ -1,28 +1,25 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink,
-  Switch
-} from "react-router-dom";
-import PrivateRoute from "./component/PrivateRoute";
-import loadable from "@loadable/component";
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
+import loadable from '@loadable/component';
+// import PrivateRoute from './component/PrivateRoute';
 
-const AsyncHome = loadable(() => import("./screens/Home"), {
-  fallback: <div>Loading...</div>
+const AsyncHome = loadable(() => import('./screens/Home'), {
+  fallback: <div>Loading...</div>,
 });
-const AsyncUsers = loadable(() => import("./screens/Users"), {
-  fallback: <div>Loading...</div>
+const AsyncUsers = loadable(() => import('./screens/Users'), {
+  fallback: <div>Loading...</div>,
 });
-const AsyncAbout = loadable(() => import("./screens/About"), {
-  fallback: <div>Loading...</div>
+const AsyncAbout = loadable(() => import('./screens/About'), {
+  fallback: <div>Loading...</div>,
 });
-const AsyncNoMatch = loadable(() => import("./screens/NoMatch"), {
-  fallback: <div>Loading...</div>
+const AsyncNoMatch = loadable(() => import('./screens/NoMatch'), {
+  fallback: <div>Loading...</div>,
 });
 
 class App extends Component {
+  state = {};
+
   render() {
     return (
       <Router>
@@ -31,7 +28,7 @@ class App extends Component {
             <ul>
               <NavLink
                 activeStyle={{
-                  color: "red"
+                  color: 'red',
                 }}
                 exact
                 to="/"
@@ -42,7 +39,7 @@ class App extends Component {
             <ul>
               <NavLink
                 activeStyle={{
-                  color: "red"
+                  color: 'red',
                 }}
                 to="/users"
               >
@@ -52,7 +49,7 @@ class App extends Component {
             <ul>
               <NavLink
                 activeStyle={{
-                  color: "red"
+                  color: 'red',
                 }}
                 to="/about"
               >
@@ -61,13 +58,9 @@ class App extends Component {
             </ul>
           </nav>
           <Switch>
-            <Route path="/" exact render={() => <AsyncHome />} />
-            <PrivateRoute
-              path="/users"
-              isAuthenticated={true}
-              component={AsyncUsers}
-            />
-            <Route path="/about" render={() => <AsyncAbout />} />
+            <Route path="/" exact render={props => <AsyncHome {...props} />} />
+            <Route path="/users" render={props => <AsyncUsers {...props} />} />
+            <Route path="/about" render={props => <AsyncAbout {...props} />} />
             <Route render={() => <AsyncNoMatch />} />
           </Switch>
         </div>
