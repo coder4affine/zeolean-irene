@@ -24,6 +24,7 @@ module.exports = {
         extensions: ['.js', '.jsx'],
       },
     ],
+    'react/forbid-prop-types': [0],
     'prettier/prettier': ['error'],
   },
 };

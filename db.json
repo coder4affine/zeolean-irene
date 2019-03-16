@@ -9,11 +9,19 @@
   "courses": [
     {
       "id": "1",
-      "title": "Building Applications in React and Flux",
+      "title": "Building Applications in React and Rdux",
       "watchHref": "http://www.pluralsight.com/courses/react-flux-building-applications",
       "authorId": "1",
       "length": "5:08",
       "category": "react"
+    },
+    {
+      "title": "title",
+      "watchHref": "http://www.pluralsight.com/courses/react-flux-building-applications",
+      "authorId": "1",
+      "length": "5:08",
+      "category": "react",
+      "id": "VBjpVB~"
     }
   ],
   "authors": [

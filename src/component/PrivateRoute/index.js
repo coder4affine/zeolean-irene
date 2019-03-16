@@ -13,6 +13,7 @@ const index = ({ component: Component, isAuthenticated, ...rest }) => {
           <Redirect
             to={{
               pathname: '/',
+              // eslint-disable-next-line react/prop-types
               state: { from: props.location },
             }}
           />
@@ -22,6 +23,9 @@ const index = ({ component: Component, isAuthenticated, ...rest }) => {
   );
 };
 
-index.propTypes = {};
+index.propTypes = {
+  component: PropTypes.element.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+};
 
 export default index;

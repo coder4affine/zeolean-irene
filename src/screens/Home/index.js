@@ -29,10 +29,35 @@ class index extends Component {
       history: { push },
     } = this.props;
 
+    const { authors } = this.state;
+
     push({
       pathname: '/users',
       search: '?query=abc',
-      state: { authors: this.state.authors },
+      state: {
+        authors,
+        course: {
+          title: '',
+          watchHref: '',
+          authorId: '',
+          length: '',
+          category: '',
+        },
+      },
+    });
+  };
+
+  editCourse = course => {
+    const {
+      history: { push },
+    } = this.props;
+
+    const { authors } = this.state;
+
+    push({
+      pathname: '/users',
+      search: '?query=abc',
+      state: { authors, course },
     });
   };
 
@@ -49,6 +74,7 @@ class index extends Component {
               <th>Author</th>
               <th>Length</th>
               <th>Category</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -63,6 +89,9 @@ class index extends Component {
                 <td>{course.authorId}</td>
                 <td>{course.length}</td>
                 <td>{course.category}</td>
+                <td>
+                  <input type="button" value="Edit" onClick={() => this.editCourse(course)} />
+                </td>
               </tr>
             ))}
           </tbody>
