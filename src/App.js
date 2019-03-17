@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 import loadable from '@loadable/component';
+import LocaleContext from './context/localeContext';
+import ThemeContext from './context/themeContext';
 // import PrivateRoute from './component/PrivateRoute';
 
 const AsyncHome = loadable(() => import('./screens/Home'), {
@@ -57,12 +59,16 @@ class App extends Component {
               </NavLink>
             </ul>
           </nav>
-          <Switch>
-            <Route path="/" exact render={props => <AsyncHome {...props} />} />
-            <Route path="/users" render={props => <AsyncUsers {...props} />} />
-            <Route path="/about" render={props => <AsyncAbout {...props} />} />
-            <Route render={() => <AsyncNoMatch />} />
-          </Switch>
+          <ThemeContext>
+            <LocaleContext>
+              <Switch>
+                <Route path="/" exact render={props => <AsyncHome {...props} />} />
+                <Route path="/users" render={props => <AsyncUsers {...props} />} />
+                <Route path="/about" render={props => <AsyncAbout {...props} />} />
+                <Route render={() => <AsyncNoMatch />} />
+              </Switch>
+            </LocaleContext>
+          </ThemeContext>
         </div>
       </Router>
     );
