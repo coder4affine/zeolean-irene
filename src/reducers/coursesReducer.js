@@ -17,6 +17,9 @@ export default (state = initialState, { type, payload }) => {
     case types.LOAD_AUTHORS_FAIL:
       return { ...state, loading: false, error: payload };
 
+    case types.SAVE_COURSE_SUCCESS:
+      return { ...state, loading: false, courses: [...state.courses, payload] };
+
     default:
       return state;
   }

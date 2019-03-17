@@ -1,11 +1,9 @@
 import React from 'react';
-// import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import { Formik, Field } from 'formik';
 import { string, object } from 'yup';
-import { connect } from 'react-redux';
 import TextInput from '../../component/TextInput';
 import DropDown from '../../component/DropDown';
-import { saveCourse } from '../../actions/coursesAction';
 
 // https://github.com/jaredpalmer/formik
 
@@ -15,26 +13,31 @@ import { saveCourse } from '../../actions/coursesAction';
 
 const formData = [
   {
+    id: 1,
     name: 'title',
     title: 'Title',
     component: 'text',
   },
   {
+    id: 2,
     name: 'watchHref',
     title: 'Link',
     component: 'text',
   },
   {
+    id: 3,
     name: 'category',
     title: 'Category',
     component: 'text',
   },
   {
+    id: 4,
     name: 'length',
     title: 'Length',
     component: 'text',
   },
   {
+    id: 5,
     name: 'authorId',
     title: 'Author',
     component: 'select',
@@ -52,12 +55,13 @@ const CoursesSchema = object().shape({
     .required('Required'),
 });
 
-const index = ({ location: { state }, history: { push }, addCourse }) => {
+const index = ({ authors, course, addCourse, closeDialog }) => {
   return (
     <div>
       <h2>Add Courses</h2>
       <Formik
-        initialValues={state.course}
+        enableReinitialize
+        initialValues={course}
         validationSchema={CoursesSchema}
         // validate={values => {
         //   let errors = {};
@@ -76,30 +80,26 @@ const index = ({ location: { state }, history: { push }, addCourse }) => {
         //   return errors;
         // }}
         onSubmit={async (values, actions) => {
-          addCourse(values, actions).then(() =>
-            push({
-              pathname: '/',
-            }),
-          );
+          addCourse(values, actions).then(closeDialog);
         }}
-        render={({ handleSubmit, isSubmitting, errors, values }) => {
+        render={({ handleSubmit, isSubmitting, errors }) => {
           console.log(errors);
           return (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
               <span>{errors.apiFail}</span>
-              {formData.map((item, index) => (
+              {formData.map(item => (
                 <Field
-                  key={index}
+                  key={item.id}
                   name={item.name}
                   title={item.title}
-                  data={item.component === 'select' ? state.authors : null}
+                  data={item.component === 'select' ? authors : null}
                   component={item.component === 'text' ? TextInput : DropDown}
                 />
               ))}
 
               <input
                 type="submit"
-                value={state.course.id ? 'Edit Course' : 'Save Course'}
+                value={course.id ? 'Edit Course' : 'Save Course'}
                 disabled={isSubmitting}
               />
             </form>
@@ -110,17 +110,11 @@ const index = ({ location: { state }, history: { push }, addCourse }) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {};
-}
+index.propTypes = {
+  authors: PropTypes.array.isRequired,
+  course: PropTypes.object.isRequired,
+  addCourse: PropTypes.func.isRequired,
+  closeDialog: PropTypes.func.isRequired,
+};
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addCourse: (course, actions) => saveCourse(course, actions)(dispatch),
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(index);
+export default index;

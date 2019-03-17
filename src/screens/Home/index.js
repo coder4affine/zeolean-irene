@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getData } from '../../actions/coursesAction';
+import { getData, saveCourse } from '../../actions/coursesAction';
+import Users from '../Users';
 // import { LocaleConsumer } from '../../context/localeContext';
 // import { ThemeConsumer } from '../../context/themeContext';
 
@@ -11,10 +12,16 @@ class index extends Component {
     props.getData();
   }
 
-  // state = {
-  //   courses: [],
-  //   authors: [],
-  // };
+  state = {
+    open: false,
+    course: {
+      title: '',
+      watchHref: '',
+      authorId: '',
+      length: '',
+      category: '',
+    },
+  };
 
   // componentDidMount() {
   //   this.getCourses();
@@ -34,44 +41,20 @@ class index extends Component {
   // };
 
   addCourses = () => {
-    const {
-      history: { push },
-      authors: { authors },
-    } = this.props;
-
-    push({
-      pathname: '/users',
-      search: '?query=abc',
-      state: {
-        authors,
-        course: {
-          title: '',
-          watchHref: '',
-          authorId: '',
-          length: '',
-          category: '',
-        },
-      },
-    });
+    this.setState({ open: true });
   };
 
   editCourse = course => {
-    const {
-      history: { push },
-      authors: { authors },
-    } = this.props;
-
-    push({
-      pathname: '/users',
-      search: '?query=abc',
-      state: { authors, course },
-    });
+    this.setState({ course, open: true });
   };
 
   render() {
     const {
-      courses: { loading, courses, error },
+      courses: { courses },
+      authors: { authors },
+      addCourse,
     } = this.props;
+    const { course, open } = this.state;
     return (
       <div>
         {/* <button onClick={this.props.changeLocale}>Chnage Locale</button>
@@ -93,7 +76,7 @@ class index extends Component {
             </div>
           )}
         </ThemeConsumer> */}
-        <button onClick={this.addCourses}>Create Course</button>
+        <input type="button" value="Create Course" onClick={this.addCourses} />
         <table>
           <thead>
             <tr>
@@ -124,6 +107,17 @@ class index extends Component {
             ))}
           </tbody>
         </table>
+        <dialog open={open}>
+          <div>
+            <input type="button" onClick={() => this.setState({ open: false })} value="Close" />
+            <Users
+              authors={authors}
+              course={course}
+              addCourse={addCourse}
+              closeDialog={() => this.setState({ open: false })}
+            />
+          </div>
+        </dialog>
       </div>
     );
   }
@@ -145,6 +139,7 @@ function mapDispatchToProps(dispatch) {
   return {
     changeLocale: () => dispatch({ type: 'CHANGE_LOCALE', payload: { locale: 'spanish' } }),
     getData: () => getData()(dispatch),
+    addCourse: (course, actions) => saveCourse(course, actions)(dispatch),
   };
 }
 

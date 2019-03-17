@@ -26,7 +26,7 @@ export const saveCourse = (course, actions) => {
     } else {
       dispatch({ type: types.SAVE_COURSE });
     }
-
+    console.log(course);
     try {
       let url = 'http://localhost:3004/courses';
       if (course.id) url = `${url}/${course.id}`;
@@ -39,8 +39,10 @@ export const saveCourse = (course, actions) => {
         body: JSON.stringify(course),
       });
       actions.setSubmitting(false);
-
+      actions.resetForm();
       const data = await res.json();
+
+      console.log(data);
 
       if (course.id) {
         dispatch({ type: types.UPDATE_COURSE_SUCCESS, payload: data });
