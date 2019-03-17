@@ -1,38 +1,43 @@
 import React, { Component } from 'react';
-// import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { LocaleConsumer } from '../../context/localeContext';
-import { ThemeConsumer } from '../../context/themeContext';
+import { getData } from '../../actions/coursesAction';
+// import { LocaleConsumer } from '../../context/localeContext';
+// import { ThemeConsumer } from '../../context/themeContext';
 
 class index extends Component {
-  state = {
-    courses: [],
-    authors: [],
-  };
-
-  componentDidMount() {
-    this.getCourses();
+  constructor(props) {
+    super(props);
+    props.getData();
   }
 
-  getCourses = async () => {
-    const coursesApi = await fetch('http://localhost:3004/courses');
-    const authorsApi = await fetch('http://localhost:3004/authors');
-    const res = await Promise.all([coursesApi, authorsApi]);
-    console.log(res);
-    const courses = await res[0].json();
-    const authors = await res[1].json();
-    this.setState({
-      courses,
-      authors,
-    });
-  };
+  // state = {
+  //   courses: [],
+  //   authors: [],
+  // };
+
+  // componentDidMount() {
+  //   this.getCourses();
+  // }
+
+  // getCourses = async () => {
+  //   const coursesApi = await fetch('http://localhost:3004/courses');
+  //   const authorsApi = await fetch('http://localhost:3004/authors');
+  //   const res = await Promise.all([coursesApi, authorsApi]);
+  //   console.log(res);
+  //   const courses = await res[0].json();
+  //   const authors = await res[1].json();
+  //   this.setState({
+  //     courses,
+  //     authors,
+  //   });
+  // };
 
   addCourses = () => {
     const {
       history: { push },
+      authors: { authors },
     } = this.props;
-
-    const { authors } = this.state;
 
     push({
       pathname: '/users',
@@ -53,9 +58,8 @@ class index extends Component {
   editCourse = course => {
     const {
       history: { push },
+      authors: { authors },
     } = this.props;
-
-    const { authors } = this.state;
 
     push({
       pathname: '/users',
@@ -65,13 +69,13 @@ class index extends Component {
   };
 
   render() {
-    const { courses } = this.state;
-    console.log(this.props.locale);
-    console.log(this.props.theme);
+    const {
+      courses: { loading, courses, error },
+    } = this.props;
     return (
       <div>
-        <button onClick={this.props.changeLocale}>Chnage Locale</button>
-        <button onClick={this.addCourses}>Create Course</button>
+        {/* <button onClick={this.props.changeLocale}>Chnage Locale</button>
+        
         <LocaleConsumer>
           {value => (
             <div>
@@ -88,7 +92,8 @@ class index extends Component {
               <button onClick={() => value.changeTheme('light')}>Change Theme</button>
             </div>
           )}
-        </ThemeConsumer>
+        </ThemeConsumer> */}
+        <button onClick={this.addCourses}>Create Course</button>
         <table>
           <thead>
             <tr>
@@ -101,7 +106,7 @@ class index extends Component {
             </tr>
           </thead>
           <tbody>
-            {courses.map((course, index) => (
+            {courses.map(course => (
               <tr key={course.id}>
                 <td className={index % 2 === 0 ? 'spanStyle' : 'spanStyle title'}>
                   {course.title}
@@ -124,17 +129,22 @@ class index extends Component {
   }
 }
 
-index.propTypes = {};
+index.propTypes = {
+  history: PropTypes.object.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
     locale: state.locale,
+    authors: state.authors,
+    courses: state.courses,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     changeLocale: () => dispatch({ type: 'CHANGE_LOCALE', payload: { locale: 'spanish' } }),
+    getData: () => getData()(dispatch),
   };
 }
 

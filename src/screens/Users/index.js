@@ -2,8 +2,10 @@ import React from 'react';
 // import PropTypes from "prop-types";
 import { Formik, Field } from 'formik';
 import { string, object } from 'yup';
+import { connect } from 'react-redux';
 import TextInput from '../../component/TextInput';
 import DropDown from '../../component/DropDown';
+import { saveCourse } from '../../actions/coursesAction';
 
 // https://github.com/jaredpalmer/formik
 
@@ -50,7 +52,7 @@ const CoursesSchema = object().shape({
     .required('Required'),
 });
 
-const index = ({ location: { state }, history: { push } }) => {
+const index = ({ location: { state }, history: { push }, addCourse }) => {
   return (
     <div>
       <h2>Add Courses</h2>
@@ -74,28 +76,13 @@ const index = ({ location: { state }, history: { push } }) => {
         //   return errors;
         // }}
         onSubmit={async (values, actions) => {
-          try {
-            let url = 'http://localhost:3004/courses';
-            if (state.course.id) url = `${url}/${state.course.id}`;
-            await fetch(url, {
-              headers: {
-                accept: 'application/json',
-                'Content-Type': 'application/json',
-              },
-              method: state.course.id ? 'PUT' : 'POST',
-              body: JSON.stringify(values),
-            });
-            actions.setSubmitting(false);
+          addCourse(values, actions).then(() =>
             push({
               pathname: '/',
-            });
-          } catch (error) {
-            console.log(error);
-            actions.setErrors({ apiFail: 'Api FaIL' });
-            actions.setSubmitting(false);
-          }
+            }),
+          );
         }}
-        render={({ handleSubmit, isSubmitting, errors }) => {
+        render={({ handleSubmit, isSubmitting, errors, values }) => {
           console.log(errors);
           return (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -123,4 +110,17 @@ const index = ({ location: { state }, history: { push } }) => {
   );
 };
 
-export default index;
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addCourse: (course, actions) => saveCourse(course, actions)(dispatch),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(index);
