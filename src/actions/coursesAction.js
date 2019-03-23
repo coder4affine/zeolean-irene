@@ -43,14 +43,22 @@ export const saveCourse = (course, actions) => {
       const data = await res.json();
 
       console.log(data);
-
-      if (course.id) {
-        dispatch({ type: types.UPDATE_COURSE_SUCCESS, payload: data });
+      if (data.error) {
+        if (course.id) {
+          dispatch({ type: types.UPDATE_COURSE_FAIL, payload: data });
+        } else {
+          dispatch({ type: types.SAVE_COURSE_FAIL, payload: data });
+        }
       } else {
-        dispatch({ type: types.SAVE_COURSE_SUCCESS, payload: data });
+        if (course.id) {
+          dispatch({ type: types.UPDATE_COURSE_SUCCESS, payload: data });
+        } else {
+          dispatch({ type: types.SAVE_COURSE_SUCCESS, payload: data });
+        }
       }
     } catch (error) {
-      actions.setErrors({ apiFail: 'Api FaIL' });
+      console.log(error);
+      actions.setErrors(error);
       actions.setSubmitting(false);
       if (course.id) {
         dispatch({ type: types.UPDATE_COURSE_FAIL, payload: error });

@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Field } from 'formik';
 import { string, object } from 'yup';
+
+import Select from 'react-select';
 import TextInput from '../../component/TextInput';
 import DropDown from '../../component/DropDown';
+import MultiSelect from '../../component/MultiSelect';
 
 // https://github.com/jaredpalmer/formik
 
@@ -42,6 +45,18 @@ const formData = [
     title: 'Author',
     component: 'select',
   },
+  {
+    id: 6,
+    name: 'color',
+    title: 'Color',
+    component: 'multiSelect',
+  },
+];
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
 ];
 
 const CoursesSchema = object().shape({
@@ -53,6 +68,7 @@ const CoursesSchema = object().shape({
     .min(2, 'Too Short!')
     .max(200, 'Too Long!')
     .required('Required'),
+  color: string().required('Required'),
 });
 
 const index = ({ authors, course, addCourse, closeDialog }) => {
@@ -80,9 +96,10 @@ const index = ({ authors, course, addCourse, closeDialog }) => {
         //   return errors;
         // }}
         onSubmit={async (values, actions) => {
+          console.log(values);
           addCourse(values, actions).then(closeDialog);
         }}
-        render={({ handleSubmit, isSubmitting, errors }) => {
+        render={({ handleSubmit, isSubmitting, errors, setFieldValue }) => {
           console.log(errors);
           return (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -92,8 +109,26 @@ const index = ({ authors, course, addCourse, closeDialog }) => {
                   key={item.id}
                   name={item.name}
                   title={item.title}
-                  data={item.component === 'select' ? authors : null}
-                  component={item.component === 'text' ? TextInput : DropDown}
+                  onMultiSelect={(val, items) => {
+                    if (item.component === 'multiSelect') {
+                      setFieldValue('color', val, true);
+                    }
+                  }}
+                  data={
+                    item.component === 'select'
+                      ? authors
+                      : item.component === 'multiSelect'
+                      ? options
+                      : null
+                  }
+                  defaultValue={item.component === 'multiSelect' ? [] : null}
+                  component={
+                    item.component === 'text'
+                      ? TextInput
+                      : item.component === 'multiSelect'
+                      ? MultiSelect
+                      : DropDown
+                  }
                 />
               ))}
 

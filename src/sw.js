@@ -1,5 +1,3 @@
-importScripts("/precache-manifest.b8aabc3f97698d49a559f6b16c284598.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
-
 console.log('workbox is working');
 
 //https://developers.google.com/web/tools/workbox/modules/workbox-strategies
@@ -34,7 +32,7 @@ self.addEventListener('fetch', event => {
   ) {
     event.respondWith(
       fetch(event.request).catch(
-        () =>
+        () => 
           new Response(
             JSON.stringify({
               error: 'This actions disabled while app is offline',
@@ -45,8 +43,22 @@ self.addEventListener('fetch', event => {
               },
             },
           ),
+
+          return cache.put(req.clone(), response);
       ),
     );
   }
 });
 
+// self.addEventListener('sync', function (event) {
+//     console.log('now online')
+//     if (event.tag === 'sendFormData') { // event.tag name checked
+//       // here must be the same as the one used while registering
+//       // sync
+//       event.waitUntil(
+//         // Send our POST request to the server, now that the user is
+//         // online
+//         sendPostToServer()
+//         )`
+//     }
+//   })

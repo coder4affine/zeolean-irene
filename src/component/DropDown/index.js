@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,7 +13,7 @@ const index = ({ field, form: { touched, errors }, data, title, ...props }) => {
             <option key={item.id} value={item.id}>{`${item.firstName} ${item.lastName}`}</option>
           ))}
       </select>
-      {errors.name && touched.name && <div>{errors.name}</div>}
+      {errors[field.name] && touched[field.name] && <div>{errors[field.name]}</div>}
     </div>
   );
 };

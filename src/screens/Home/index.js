@@ -50,13 +50,15 @@ class index extends Component {
 
   render() {
     const {
-      courses: { courses },
+      courses: { courses, error },
       authors: { authors },
       addCourse,
     } = this.props;
     const { course, open } = this.state;
+    console.log(error);
     return (
       <div>
+        {error && <span>{error.error}</span>}
         {/* <button onClick={this.props.changeLocale}>Chnage Locale</button>
         
         <LocaleConsumer>
@@ -89,19 +91,17 @@ class index extends Component {
             </tr>
           </thead>
           <tbody>
-            {courses.map(course => (
-              <tr key={course.id}>
-                <td className={index % 2 === 0 ? 'spanStyle' : 'spanStyle title'}>
-                  {course.title}
-                </td>
+            {courses.map(x => (
+              <tr key={x.id}>
+                <td className={index % 2 === 0 ? 'spanStyle' : 'spanStyle title'}>{x.title}</td>
                 <td>
-                  <a href={course.watchHref}>Link</a>
+                  <a href={x.watchHref}>Link</a>
                 </td>
-                <td>{course.authorId}</td>
-                <td>{course.length}</td>
-                <td>{course.category}</td>
+                <td>{x.authorId}</td>
+                <td>{x.length}</td>
+                <td>{x.category}</td>
                 <td>
-                  <input type="button" value="Edit" onClick={() => this.editCourse(course)} />
+                  <input type="button" value="Edit" onClick={() => this.editCourse(x)} />
                 </td>
               </tr>
             ))}
@@ -124,7 +124,10 @@ class index extends Component {
 }
 
 index.propTypes = {
-  history: PropTypes.object.isRequired,
+  getData: PropTypes.func.isRequired,
+  courses: PropTypes.array.isRequired,
+  authors: PropTypes.array.isRequired,
+  addCourse: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

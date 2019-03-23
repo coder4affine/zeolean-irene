@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,7 +7,7 @@ const index = ({ field, form: { touched, errors }, title, ...props }) => {
     <div style={{ display: 'flex', flex: 1, flexDirection: 'column', margin: 10 }}>
       <label htmlFor="title">{title}</label>
       <input type="text" {...field} {...props} />
-      {errors.name && touched.name && <div>{errors.name}</div>}
+      {errors[field.name] && touched[field.name] && <div>{errors[field.name]}</div>}
     </div>
   );
 };
